@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عيد ميلاد سعيد لجين ❤️</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Amiri & Cairo for Arabic aesthetics, Dancing Script for English) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Dancing+Script:wght@700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Tajawal', 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #fce4ec 0%, #f8c8dc 50%, #f3e5f5 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            user-select: none;
+        }
+
+        .font-dancing {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        /* Glassmorphism Card Style */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 20px 40px rgba(248, 200, 220, 0.4), 0 8px 16px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Floating particles background */
+        .particle {
+            position: absolute;
+            pointer-events: none;
+            animation: float 6s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(15deg); }
+        }
+
+        /* Pulsing Glow Effect */
+        .glow-pink {
+            box-shadow: 0 0 25px rgba(244, 114, 182, 0.6);
+        }
+
+        /* Dodging button smooth animation */
+        #exitBtn {
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Fade transitions between steps */
+        .fade-step {
+            transition: all 0.6s ease-in-out;
+        }
+
+        /* Custom scrollbar for textareas */
+        textarea::-webkit-scrollbar {
+            width: 6px;
+        }
+        textarea::-webkit-scrollbar-thumb {
+            background-color: #f472b6;
+            border-radius: 10px;
+        }
+
+        /* Heart Beat Animation */
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.12); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.12); }
+            70% { transform: scale(1); }
+        }
+        .animate-heartbeat {
+            animation: heartbeat 1.5s infinite ease-in-out;
+        }
+
+        /* Glowing text effect */
+        .text-glow {
+            text-shadow: 0 0 12px rgba(255, 105, 180, 0.8), 0 0 24px rgba(255, 20, 147, 0.5);
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4 relative overflow-hidden">
+
+    <!-- Floating Background Decor Elements -->
+    <div id="particles-container" class="absolute inset-0 overflow-hidden pointer-events-none"></div>
+
+    <!-- Main App Container -->
+    <div class="w-full max-w-lg z-10">
+
+        <!-- STEP 1: INITIAL ESCAPE BUTTON GAME -->
+        <div id="step1" class="glass-card rounded-3xl p-8 text-center relative transition-all duration-500 transform scale-100">
+            <div class="mb-6">
+                <div class="w-20 h-20 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4 text-pink-500 shadow-inner">
+                    <i class="fa-solid fa-gift text-3xl animate-bounce"></i>
+                </div>
+                <h1 class="text-2xl font-bold text-gray-800 mb-2">مرحباً بكِ يا أنستي ✨</h1>
+                <p class="text-gray-600 text-sm">هناك مفاجأة خاصة تنتظركِ في الداخل...</p>
+            </div>
+
+            <!-- Toast / Dialogue Notification Box -->
+            <div id="dialogueBox" class="hidden mb-6 p-3 bg-pink-50 border border-pink-200 rounded-2xl text-pink-700 text-sm font-medium animate-pulse">
+                <span id="dialogueText"></span>
+            </div>
+
+            <div class="flex items-center justify-center gap-4 relative min-h-[80px]" id="buttonArea">
+                <button id="enterBtn" onclick="goToStep2()" class="px-8 py-3.5 bg-gradient-to-r from-pink-400 to-rose-400 text-white font-bold rounded-2xl shadow-lg hover:shadow-pink-300 hover:scale-105 active:scale-95 transition-all duration-200 flex items-center gap-2">
+                    <i class="fa-solid fa-heart"></i> اضغطي هنا
+                </button>
+                
+                <button id="exitBtn" onmouseover="dodgeButton()" onclick="dodgeButtonOnClick()" class="px-6 py-3.5 bg-white text-gray-500 border border-gray-200 font-semibold rounded-2xl shadow-sm hover:bg-gray-50 transition-all duration-200">
+                    خروج
+                </button>
+            </div>
+        </div>
+
+        <!-- STEP 2: QUESTIONNAIRE -->
+        <div id="step2" class="glass-card rounded-3xl p-8 hidden text-center transition-all duration-500">
+            <div id="welcomeHeader" class="mb-6">
+                <span class="text-4xl inline-block animate-bounce mb-2">🙂</span>
+                <h2 class="text-2xl font-bold text-pink-600">مرحباً بكِ</h2>
+                <p class="text-gray-500 text-sm">لدي بضعة أسئلة بسيطة لكِ قبل البدء...</p>
+            </div>
+
+            <!-- Questions Container -->
+            <div id="questionsContainer" class="space-y-4">
+                <!-- Question 1 -->
+                <div id="q1" class="question-step">
+                    <label class="block text-right text-gray-700 font-semibold mb-2">1. مرحبا كيف حالك اليوم؟ 🌸</label>
+                    <textarea id="ans1" rows="3" class="w-full p-4 rounded-2xl border border-pink-200 focus:ring-2 focus:ring-pink-400 focus:outline-none bg-white/80 text-gray-700 resize-none" placeholder="اكتبي إجابتكِ هنا..."></textarea>
+                    <button onclick="nextQuestion(1)" class="mt-4 w-full py-3 bg-pink-500 hover:bg-pink-600 text-white font-bold rounded-xl shadow-md transition">التالي <i class="fa-solid fa-arrow-left mr-1"></i></button>
+                </div>
+
+                <!-- Question 2 -->
+                <div id="q2" class="question-step hidden">
+                    <label class="block text-right text-gray-700 font-semibold mb-2">2. في أي يوم نحن؟ 📅</label>
+                    <textarea id="ans2" rows="3" class="w-full p-4 rounded-2xl border border-pink-200 focus:ring-2 focus:ring-pink-400 focus:outline-none bg-white/80 text-gray-700 resize-none" placeholder="اكتبي إجابتكِ هنا..."></textarea>
+                    <button onclick="nextQuestion(2)" class="mt-4 w-full py-3 bg-pink-500 hover:bg-pink-600 text-white font-bold rounded-xl shadow-md transition">التالي <i class="fa-solid fa-arrow-left mr-1"></i></button>
+                </div>
+
+                <!-- Question 3 -->
+                <div id="q3" class="question-step hidden">
+                    <label class="block text-right text-gray-700 font-semibold mb-2">3. هل أنتِ سعيدة لأنني معك؟ 💕</label>
+                    <textarea id="ans3" rows="3" class="w-full p-4 rounded-2xl border border-pink-200 focus:ring-2 focus:ring-pink-400 focus:outline-none bg-white/80 text-gray-700 resize-none" placeholder="اكتبي بصراحة..."></textarea>
+                    <button onclick="evaluateQ3()" class="mt-4 w-full py-3 bg-pink-500 hover:bg-pink-600 text-white font-bold rounded-xl shadow-md transition">إرسال الإجابة <i class="fa-solid fa-paper-plane mr-1"></i></button>
+                </div>
+            </div>
+
+            <!-- Reaction Display Area -->
+            <div id="reactionArea" class="hidden my-6">
+                <div id="reactionEmojis" class="text-6xl mb-3 animate-bounce"></div>
+                <button id="transitionBtn" onclick="goToStep3()" class="w-full py-3.5 bg-gradient-to-r from-pink-500 to-rose-400 text-white font-bold rounded-2xl shadow-lg hover:shadow-pink-300 transition-all duration-300">
+                    إضغطي من فضلكِ أنستي الجميلة ✨
+                </button>
+            </div>
+        </div>
+
+        <!-- STEP 3: MATRIX DIGITAL CODE & HEART REVEAL (Dark Canvas Screen) -->
+        <div id="step3" class="fixed inset-0 bg-black hidden z-50 flex flex-col items-center justify-center p-4">
+            <canvas id="matrixCanvas" class="absolute inset-0 w-full h-full"></canvas>
+
+            <!-- Container for glowing heart text overlay -->
+            <div id="heartOverlay" class="relative z-10 text-center opacity-0 transition-opacity duration-1000">
+                <div class="text-pink-500 text-8xl mb-6 filter drop-shadow-[0_0_20px_rgba(255,20,147,0.9)] animate-heartbeat">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+                <h1 class="text-3xl md:text-5xl font-extrabold text-pink-300 text-glow tracking-wide mb-8">
+                    عيد ميلاد سعيد لجين 🎉❤️
+                </h1>
+                <button onclick="goToStep4()" class="px-8 py-3.5 bg-pink-600 hover:bg-pink-500 text-white font-bold rounded-full shadow-[0_0_20px_rgba(255,105,180,0.8)] transition-all transform hover:scale-105">
+                    افتحي الرسالة 💌
+                </button>
+            </div>
+        </div>
+
+        <!-- STEP 4: LOVE LETTER & FINAL BIRTHDAY CARD -->
+        <div id="step4" class="glass-card rounded-3xl p-8 hidden text-center relative transition-all duration-500">
+            <!-- Love Letter Content -->
+            <div id="letterSection" class="text-right leading-relaxed">
+                <div class="text-center mb-6">
+                    <span class="inline-block p-3 bg-pink-100 rounded-full text-pink-500 mb-2">
+                        <i class="fa-solid fa-envelope-open-text text-2xl"></i>
+                    </span>
+                    <h3 class="text-xl font-bold text-gray-800">رسالة من القلب 💖</h3>
+                </div>
+
+                <div class="bg-white/90 p-6 rounded-2xl border border-pink-100 shadow-sm text-gray-700 space-y-3 font-medium text-base md:text-lg">
+                    <p class="font-bold text-pink-600">من محمد أمين زيرق</p>
+                    <p>
+                        إلى من أحبها قلبي وذاب في هواها، إلى حبيبتي وأميرتي الجميلة، أتمنى لكِ عيد ميلاد سعيد وعاماً سعيداً، وأتمنى لكِ كل الخير في حياتكِ التي أتمنى أن أكون جزءاً منها في يومٍ من الأيام، وأن يجعل أيامنا كلها فرحاً.
+                    </p>
+                    <p class="font-semibold text-pink-500 text-left pt-2">
+                        أحبكِ من أعماق قلبي وأتمنى لكِ كل الخير... 💕
+                    </p>
+                </div>
+
+                <button onclick="showFinalCard()" class="mt-6 w-full py-3.5 bg-gradient-to-r from-pink-500 to-rose-400 text-white font-bold rounded-2xl shadow-lg hover:shadow-pink-300 transition-all flex items-center justify-center gap-2">
+                    التالي <i class="fa-solid fa-arrow-left"></i>
+                </button>
+            </div>
+
+            <!-- Final Birthday Heart Card -->
+            <div id="finalCardSection" class="hidden py-6">
+                <div class="relative flex items-center justify-center my-8">
+                    <!-- Giant Red Glowing Heart -->
+                    <div class="w-64 h-64 md:w-80 md:h-80 bg-gradient-to-tr from-red-600 via-rose-500 to-pink-500 rounded-full flex items-center justify-center shadow-[0_0_50px_rgba(239,68,68,0.7)] animate-heartbeat relative">
+                        <!-- Heart Shape Icon backdrop layer -->
+                        <i class="fa-solid fa-heart text-[220px] md:text-[270px] text-red-600 absolute opacity-90 drop-shadow-lg"></i>
+                        
+                        <!-- Calligraphic Text inside the Heart -->
+                        <div class="relative z-10 text-center px-4">
+                            <p class="font-dancing text-3xl md:text-4xl text-white font-bold tracking-wider drop-shadow-md border-b-2 border-white/40 pb-2">
+                                Happy Birthday
+                            </p>
+                            <p class="font-dancing text-4xl md:text-5xl text-yellow-200 font-extrabold mt-2 drop-shadow-lg">
+                                Loudjaine
+                            </p>
+                            <div class="mt-2 text-white/90 text-sm font-light">✨ 💕 ✨</div>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-pink-600 font-bold text-lg mb-4">كل عام وأنتِ أجمَل أقداري 🌸</p>
+                
+                <button onclick="restartExperience()" class="text-xs text-gray-400 underline hover:text-pink-500 transition">
+                    إعادة التشغيل 🔄
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- 1. Background Particles ---
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            const icons = ['fa-heart', 'fa-star', 'fa-sparkles'];
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('i');
+                const randomIcon = icons[Math.floor(Math.random() * icons.length)];
+                particle.className = `fa-solid ${randomIcon} particle text-pink-300`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.fontSize = `${Math.random() * 18 + 10}px`;
+                particle.style.animationDuration = `${Math.random() * 4 + 4}s`;
+                particle.style.animationDelay = `${Math.random() * 2}s`;
+                container.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // --- 2. Dodging Exit Button Logic ---
+        let exitClickCount = 0;
+        const dialogueBox = document.getElementById('dialogueBox');
+        const dialogueText = document.getElementById('dialogueText');
+        const exitBtn = document.getElementById('exitBtn');
+
+        const dialogueMessages = [
+            "لماذا تريدين الخروج؟ أليس مبكراً؟ 🥺",
+            "جربي لن تخسري شيئاً 😉✨",
+            "أرجوكِ لا تخرجي! اضغطي على زر 'اضغطي هنا' لتشفي المفاجأة 💖🙏"
+        ];
+
+        function dodgeButton() {
+            const buttonArea = document.getElementById('buttonArea');
+            const rect = buttonArea.getBoundingClientRect();
+            
+            // Random offset within the card limits
+            const x = (Math.random() - 0.5) * 180;
+            const y = (Math.random() - 0.5) * 80;
+
+            exitBtn.style.transform = `translate(${x}px, ${y}px)`;
+        }
+
+        function dodgeButtonOnClick() {
+            exitClickCount++;
+            dodgeButton();
+
+            dialogueBox.classList.remove('hidden');
+            if (exitClickCount === 1) {
+                dialogueText.innerText = dialogueMessages[0];
+            } else if (exitClickCount === 2) {
+                dialogueText.innerText = dialogueMessages[1];
+            } else {
+                dialogueText.innerText = dialogueMessages[2];
+            }
+        }
+
+        // --- 3. Step Navigation ---
+        function goToStep2() {
+            document.getElementById('step1').classList.add('hidden');
+            document.getElementById('step2').classList.remove('hidden');
+        }
+
+        function nextQuestion(currentQ) {
+            const currentAns = document.getElementById(`ans${currentQ}`).value.trim();
+            if (!currentAns) {
+                alert('من فضلكِ اكتبي إجابة بسيطة أولاً ✨');
+                return;
+            }
+            document.getElementById(`q${currentQ}`).classList.add('hidden');
+            document.getElementById(`q${currentQ + 1}`).classList.remove('hidden');
+        }
+
+        function evaluateQ3() {
+            const ans3Text = document.getElementById('ans3').value.trim().toLowerCase();
+            if (!ans3Text) {
+                alert('من فضلكِ أجبي على السؤال ✨');
+                return;
+            }
+
+            document.getElementById('questionsContainer').classList.add('hidden');
+            document.getElementById('welcomeHeader').classList.add('hidden');
+
+            const reactionArea = document.getElementById('reactionArea');
+            const reactionEmojis = document.getElementById('reactionEmojis');
+            reactionArea.classList.remove('hidden');
+
+            // Positive answers keywords list
+            const positiveKeywords = ['نعم', 'يس', 'yes', 'سعيدة', 'أكيد', 'اكيد', 'طبعا', 'جدا', 'كثيرا', 'بحبك', 'حب'];
+            const isPositive = positiveKeywords.some(keyword => ans3Text.includes(keyword));
+
+            if (isPositive) {
+                reactionEmojis.innerHTML = '😍 🥳 🎉 💕';
+            } else {
+                reactionEmojis.innerHTML = '🥲 💔 🥺';
+            }
+        }
+
+        // --- 4. Matrix Code Rain Effect & Transition (Step 3) ---
+        let matrixInterval;
+        function goToStep3() {
+            document.getElementById('step2').classList.add('hidden');
+            const step3 = document.getElementById('step3');
+            step3.classList.remove('hidden');
+
+            startMatrixEffect();
+
+            // After 3.5 seconds, reveal the heart and birthday title
+            setTimeout(() => {
+                document.getElementById('heartOverlay').classList.remove('opacity-0');
+            }, 3500);
+        }
+
+        function startMatrixEffect() {
+            const canvas = document.getElementById('matrixCanvas');
+            const ctx = canvas.getContext('2d');
+
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const arabicChars = 'لجينمحمدأمينحبسعادةعيدميلاد0123456789💖✨❤️';
+            const fontSize = 16;
+            const columns = Math.floor(canvas.width / fontSize);
+            const drops = Array(columns).fill(1);
+
+            function drawMatrix() {
+                // Semi-transparent black background to leave trails
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.08)';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                // Hot Pink code color
+                ctx.fillStyle = '#FF69B4';
+                ctx.font = `${fontSize}px Tajawal, sans-serif`;
+
+                for (let i = 0; i < drops.length; i++) {
+                    const text = arabicChars.charAt(Math.floor(Math.random() * arabicChars.length));
+                    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+
+            matrixInterval = setInterval(drawMatrix, 33);
+        }
+
+        // --- 5. Step 4: Final Message and Card ---
+        function goToStep4() {
+            clearInterval(matrixInterval);
+            document.getElementById('step3').classList.add('hidden');
+            document.getElementById('step4').classList.remove('hidden');
+        }
+
+        function showFinalCard() {
+            document.getElementById('letterSection').classList.add('hidden');
+            document.getElementById('finalCardSection').classList.remove('hidden');
+        }
+
+        function restartExperience() {
+            location.reload();
+        }
+    </script>
+</body>
+</html>
